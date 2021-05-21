@@ -7,16 +7,16 @@ import classes from './Cart.module.css';
 const Cart = (props) => {
     const cartCtx = useContext(CartContext);
 
-    const totalAmount = `$${cartCtx.totalAmount}`;
+    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 
     const hasItem = cartCtx.items.length > 0;
 
     const cartRemoveHandler = (id) => {
-
+        cartCtx.removeItem(id)
     }
 
     const cartAddHandler = (item) => {
-
+        cartCtx.addItem({...item, amount: 1})
     }
 
     const cartItems =
@@ -35,7 +35,7 @@ const Cart = (props) => {
     return <Modal onClose={props.onClose}>
         {cartItems}
         <div className={classes.total}>
-            <span> Total Amount</span>
+            <span> Total Amount </span>
             <span> {totalAmount} </span>
         </div>
         <div className={classes.actions}>
